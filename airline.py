@@ -32,6 +32,13 @@ def main():
     Source = st.selectbox("Source" ,['Banglore', 'Kolkata', 'Delhi', 'Chennai', 'Mumbai'] )
     Destination = st.selectbox("Destination" ,['New Delhi', 'Banglore', 'Cochin', 'Kolkata', 'Delhi', 'Hyderabad'])
     Dep_DayPart= st.selectbox("Departure part of day",['Early Morning', 'Morning', 'Noon', 'Evening', 'Night'])
+    st.text_area("",
+        "# Departure part of day:\n"
+        "Early Morning is Before 6am,\n"
+        "Morning is After 6am and Before 12pm,\n"
+        "Noon is After 12pm and Before 15pm,\n"
+        "Evening is After 15pm and Before 19pm,\n"
+        "Night is After 19pm",)
     DurationInMinutes = st.slider("Duration In Minutes", min_value=60, max_value=3000, value=60, step=1)
     StopsCount = st.selectbox("Number of stops", [0, 1, 2, 3, 4])
     Additional_Info = st.selectbox("Additional_Info" ,['No info', 'In-flight meal not included',
@@ -40,6 +47,7 @@ def main():
        'Red-eye flight', '2 Long layover'] )
     if st.button("Predict"):
         Results = Make_Prdiction(Airline, day, month, Source, Destination, Dep_DayPart,DurationInMinutes, StopsCount, Additional_Info)
+        Results= "{:,.2f}".format(Results)
         st.write('Price:', Results)
              
 main()
